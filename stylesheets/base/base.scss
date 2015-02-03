@@ -1,0 +1,642 @@
+// ==========================================================================
+//
+// Base CSS. 
+// Only include things which need to appear in *every* page
+//
+//
+
+@import "../../bower_components/normalize-css/normalize";
+
+// Installed as a gem for lots of annoying reasons
+@import "bourbon";
+
+body {
+
+  // Checks bourbon is running
+  @include transition(all 0.4s);
+  color: white;
+
+}
+
+// ==========================================================================
+//
+// Variables
+// 
+
+// ---------------------------------------------
+// Typography
+
+$base--font-size: 16px;
+
+$base--line-height: 26px;
+
+$font--base: 'BrandonText-Regular', "Helvetica", Arial, sans-serif;
+
+
+// ---------------------------------------------
+// Colour
+
+$color--background: #76caca;
+$alt-background: pink;
+
+$color--text: #FFFBE4;
+
+$dark-border: #3dbfb8;
+
+// ---------------------------------
+// Media queries breakpoints & mixin
+// 
+// Usage: 
+// 
+//  @include mq("small") {
+//    // small styles
+//  }
+// 
+
+$breakpoints: (
+  "extra-small" 500px,
+  "small" 600px,
+  "medium" 800px,
+  "large" 1000px,
+  "extra-large" 1200px
+);
+
+@mixin mq($size) { 
+  @each $breakpoint in $breakpoints {
+    @if ($size == nth($breakpoint, 1)) {
+      @media (min-width: nth($breakpoint, 2)) {
+        @content;
+      }
+    }
+  }
+}
+
+// ==========================================================================
+//
+// Layout
+// 
+
+$cross-fade: 1s;
+
+.static-table{
+  background:#3cc0b8;
+  height: 20%;
+  bottom: 0px;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  display:block;
+}
+
+.background-text{
+  position: fixed;
+  left: 40px;
+  right: 40px;
+  top:7%;
+  bottom: 70%;
+  text-align: center;
+  font-weight: bolder;
+
+  .text-mid{
+    @include transition(opacity 0.75s);
+    opacity: 0;
+    font-size: 8vw;
+    display: block;
+    line-height: 90%;
+    text-transform: uppercase;
+    
+  
+    @media screen and (min-height: 500px) and (min-width: 500px) {
+      display: inline-block;
+      &.js-text-change{
+        padding-left: 0.2em;
+      }
+    }
+
+    @media screen and (min-height: 1000px) {
+        display: block;
+        font-size: 10vw;
+        &.js-text-change{
+          padding-left: 0em;
+        }
+
+    }
+    @media screen and (min-width: 1400px) {
+        font-size: 10em;
+    }
+
+  }
+  .text-large{
+    @include transition(opacity 0.75s);
+    opacity: 0;
+    font-size: 18vw;
+    display: block;
+    line-height: 120%;
+    text-shadow: 0px 0.4vw #238a80;
+  }
+}
+
+.info-bar{
+  position: fixed;
+  background: none;
+  height: 30px;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  z-index: 12;
+  padding: 0px;
+  text-align: center;
+
+  @media screen and (min-width: 550px) {
+     padding: 10px;
+     height: 50px;
+  }
+
+}
+
+.top-bar{
+  position: fixed;
+  background: none;
+  height: 30px;
+  width: 100%;
+  left: 0px;
+  bottom: 0px;
+  z-index: 12;
+  padding: 0px;
+  text-align: center;
+
+  @media screen and (min-width: 550px) {
+     top: 0px;
+     bottom: auto;
+     height: auto;
+     padding: 10px;
+     height: 50px;
+  }
+}
+
+
+.small-message{
+  float: left;
+
+  &.bottom-object{
+    line-height: 20px;
+    padding-left: 15px;
+  }
+
+  p, a{
+    @include transition( border-bottom 0.25s);
+
+    color: $color--text;
+    font-size: 1em;
+    display: inline-block;
+    text-decoration: none;
+    margin:0px;
+    letter-spacing: 1px;
+    vertical-align: top;
+
+    font-size: 14px;
+    line-height: 120%;
+
+  }
+
+  &.bottom-object{
+     p, a{
+        height: 22px;
+     }
+  }
+
+  a{
+    border-bottom: 1px solid $color--text ;
+    &:visited, &:active, &:focus{
+      color: $color--text;
+    }
+    &:hover{
+      border-bottom: 1px solid rgba(225,255,225, 0);
+    }
+  }
+  
+}
+
+.share-buttons{
+
+  float: none;
+  display: inline-block;
+
+  @media screen and (min-width: 550px) {
+      float: left;
+  }
+  
+  #twitter-widget-0{
+    width: 85px !important;
+  }
+
+  div{
+    display: inline-block;
+    font-size: 1em;
+    height: 600px;
+    line-height: 26px;
+    float: left;
+    padding-left: 10px;
+    span{
+      vertical-align: top !important;
+    }
+  }
+}
+
+.home{
+  height: 100%;
+  left: 0;
+  top: 0;
+  position: fixed;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+  display: table;
+  width: 100%;
+  background: $alt-background;
+  text-align: center;
+  z-index: 99999999;
+  
+  @media screen and (min-width: 1200px) {
+      width: 1200px;
+      left: 50%;
+      margin-left: -600px;
+      padding: 0px;
+  }
+
+  .sorry-message{
+    padding-top: 0em;
+    padding-bottom: 1em;
+    float: none;
+    max-width: 700px;
+  }
+}
+
+.videoHolder{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+ 
+  .overflow-helper{
+    overflow-y: auto;
+    height: auto; 
+    display: inline-block;
+    padding: 0 20px;
+    @media screen and (min-width: 600px) {
+      padding: 0 20%;
+    }
+
+    & > :first-child{
+        margin-top: 20px;
+      @media screen and (min-width: 600px) {
+        margin-top: 40px;
+      }
+    }
+
+    & > :last-child{
+
+       margin-bottom: 20px;
+
+      @media screen and (min-width: 600px) {
+        margin-bottom: 40px;
+      }
+    }
+
+  }
+ 
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.not-suport-prez{
+  position: fixed;
+  height: 20%;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  background: url("../data/images/not_suported_prez.jpg") no-repeat 50% 0%;
+  background-size: auto 100%;
+}
+
+#mute-button{
+  position: fixed;
+  right: 15px;
+  top: 10px;
+  z-index: 99999;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: url("../data/images/mute-sprite.png") no-repeat;
+  background-position: 0px 0px;
+  background-size: auto 100%;
+
+
+  &.muted{
+    background-position: -40px 0px;
+  }
+}
+
+.info-button{
+  position: fixed;
+  right: 10px;
+  bottom: 15px;
+  z-index: 99999;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: url("../data/images/info-sprite.png") no-repeat;
+  background-position: 0px 0px;
+  background-size: auto 100%;
+
+  &.open{
+    background-position: -40px 0px;
+  }
+
+}
+.logo-svg{
+  width: 30%;
+  height: auto;
+  max-width: 400px;
+  padding-bottom: 1.7em;
+}
+
+.credits{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  display: none;
+  background: $alt-background;
+  z-index: 4;
+  display: none;
+  text-align: center;
+
+  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+  -moz-animation:fadeIn ease-in 1;
+  animation:fadeIn ease-in 1;
+  
+  -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+  -moz-animation-fill-mode:forwards;
+  animation-fill-mode:forwards;
+  
+  -webkit-animation-duration:200ms;
+  -moz-animation-duration:200ms;
+  animation-duration:200ms;
+
+
+  .center-credits{
+    
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+  
+    @media screen and (min-width: 800px) {
+      padding-bottom: 200px;
+    } 
+
+  
+  }
+
+  .center-cell{
+    display: inline-block;
+    
+    @media screen and (min-width: 550px) {
+      // display: table-cell;
+    }
+
+    text-align: center;
+    vertical-align: middle;
+  }
+  .bottom-cell{
+
+    position: static;
+    
+    @media screen and (min-width: 550px) {
+      position: fixed;
+    }
+    
+    text-align: center;
+    bottom: 50px;
+    width: 100%;
+    left: 0px;
+  }
+
+  
+  a{
+    @include transition( border-bottom 0.25s);
+    color: $color--text;
+    display: inline-block;
+    border-bottom: 2px solid $color--text;
+    text-decoration: none;
+
+    &:hover{
+      border-bottom: 2px solid rgba(255,255,255, 0);
+    }
+  }
+
+}
+
+
+
+//Shame :(
+
+.desc{
+  display: none;
+
+  @media screen and (min-width: 550px) {
+    display: block;
+  }
+
+}
+
+.no-support{
+  #mute-button{
+    display: none;
+  }
+}
+
+.burst{
+  .info-button, #mute-button{
+    display: none;
+  }
+}
+
+
+
+
+// Spinner Variables
+//********************************************************//
+$color:      #ffffff;
+$size:       30px;
+$speed:      0.75s;
+$thickness:  8px; // Odd numbers created a "wobble" effect.
+
+
+// Animation Keyframes
+//********************************************************//
+@mixin rotate-forever {
+  0%    { @include transform(rotate(0deg)); }
+  100%  { @include transform(rotate(360deg)); }
+}
+@-webkit-keyframes rotate-forever { @include rotate-forever; }
+   @-moz-keyframes rotate-forever { @include rotate-forever; }
+        @keyframes rotate-forever { @include rotate-forever; }
+
+
+// The Loading Spinner™
+//********************************************************//
+.loading-spinner {
+  @include animation-duration($speed);
+  @include animation-iteration-count(infinite);
+  @include animation-name(rotate-forever);
+  @include animation-timing-function(linear);
+  @include size($size);
+  border: $thickness solid $color;
+  border-right-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.loading-spinner {
+  @include position(absolute, 50% 0 0 50%);
+  margin-left: -15px;
+}
+
+.touch{
+  .home{
+    background: $color--background;
+    
+
+  }
+
+  .videoWrapper {
+    margin-top: 1em;
+    iframe {
+      -webkit-box-shadow: 1px 1px 4px 0px rgba(50, 50, 50, 0.5);
+      -moz-box-shadow:    1px 1px 4px 0px rgba(50, 50, 50, 0.5);
+      box-shadow:         1px 1px 4px 0px rgba(50, 50, 50, 0.5);
+    }
+  }
+}
+
+// ==========================================================================
+//
+// Typography
+// 
+
+body {
+  font-size: $base--font-size;
+  line-height: $base--line-height;
+}
+
+p {
+  font-family: $font--base;
+  padding: 0 0 1.5em;
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-family: $font--base;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  line-height: 1;
+}
+
+ul, ol {
+  font-family: $font--base;
+  margin: 0 0 1.5em;;
+  padding: 0;
+  list-style-type: none;
+}
+
+h2{
+  font-size: 30px;
+  // padding-left: 20px;
+  // padding-right: 20px;
+   padding-bottom: 0.5em;
+
+
+  @media screen and (min-width: 550px) {
+    font-size: 50px;
+     padding-bottom: 1em;
+  }
+
+  @media screen and (min-width: 800px) {
+    font-size: 70px;
+  }
+
+  @media screen and (min-width: 1400px) {
+    font-size: 80px;
+  }
+  line-height: 100%;
+}
+h3{
+  font-size: 16px;
+
+  @media screen and (min-width: 550px) {
+    font-size: 20px;
+  }
+
+  @media screen and (min-width: 800px) {
+    font-size: 25px;
+  }
+
+  @media screen and (min-width: 1400px) {
+    font-size: 30px;
+  }
+
+  line-height: 100%;
+}
+
+h4{
+
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 14px;
+  line-height: 120%;
+
+}
+
+.btn{
+  background: $alt-background;
+  width: 100%;
+  max-width: 300px;
+  line-height: 40px;
+  text-align: center;
+  height: 40px;
+  display: inline-block;
+  margin-bottom: 1em;
+
+  text-decoration: none;
+  color: $color--text;
+
+  &:visited, &:focus{
+    color: $color--text;
+    background: $alt-background;
+    text-decoration: none;
+  }
+
+  &:active{
+    background: darken($alt-background, 10%);
+  }
+
+}
+

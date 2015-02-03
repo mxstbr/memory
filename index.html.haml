@@ -1,0 +1,27 @@
+---
+title: Memory
+---
+
+/ Assets 
+
+- content_for(:javascripts) do
+  = javascript_include_tag  "home"
+
+- content_for(:stylesheets) do
+  = stylesheet_link_tag  "home"
+
+%script{:src => "javascripts/randomColor.js", :type => "text/javascript"}
+%script{:canvas => "canvas", :src => "javascripts/circle.js", :type => "text/paperscript"}
+
+
+/ Haml
+
+%canvas#canvas{:resize => ""}
+
+%div.credits
+  %div.center-credits
+    %div.center-cell
+    %h2 Congratulations, you did it!
+
+%div.notice
+  %h1 Sorry, your browser is outdated and does not support HTML5. Please consider updating and then coming back!
