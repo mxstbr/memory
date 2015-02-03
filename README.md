@@ -4,7 +4,7 @@ A simple memory game in Valentines Day style, made with [Paper.js](http://paperj
 
 ## Project Structure
 
-Generated 03 February 2015 using [Frontend.md](http://github.com/animade/frontend-md)
+Generated using [Frontend.md](http://github.com/animade/frontend-md)
 
 ### Stylesheets
 
